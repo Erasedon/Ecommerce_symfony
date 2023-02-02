@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -35,6 +37,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\ManyToOne(inversedBy: 'users')]
     private ?Panier $id_panier = null;
+
+    #[ORM\ManyToMany(targetEntity: Commande::class, inversedBy: 'users')]
+    private Collection $commander;
+
+    public function __construct()
+    {
+        $this->commander = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -138,6 +148,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIdPanier(?Panier $id_panier): self
     {
         $this->id_panier = $id_panier;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commande>
+     */
+    public function getCommander(): Collection
+    {
+        return $this->commander;
+    }
+
+    public function addCommander(Commande $commander): self
+    {
+        if (!$this->commander->contains($commander)) {
+            $this->commander->add($commander);
+        }
+
+        return $this;
+    }
+
+    public function removeCommander(Commande $commander): self
+    {
+        $this->commander->removeElement($commander);
 
         return $this;
     }

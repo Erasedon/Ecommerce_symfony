@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TailleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TailleRepository::class)]
@@ -15,6 +17,14 @@ class Taille
 
     #[ORM\Column(length: 100)]
     private ?string $nom_taille = null;
+
+    #[ORM\ManyToMany(targetEntity: Articles::class, mappedBy: 'tailles')]
+    private Collection $articles;
+
+    public function __construct()
+    {
+        $this->articles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -29,6 +39,33 @@ class Taille
     public function setNomTaille(string $nom_taille): self
     {
         $this->nom_taille = $nom_taille;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Articles>
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Articles $article): self
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles->add($article);
+            $article->addTaille($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Articles $article): self
+    {
+        if ($this->articles->removeElement($article)) {
+            $article->removeTaille($this);
+        }
 
         return $this;
     }

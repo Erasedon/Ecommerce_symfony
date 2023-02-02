@@ -21,9 +21,13 @@ class Panier
     #[ORM\OneToMany(mappedBy: 'id_panier', targetEntity: User::class)]
     private Collection $users;
 
+    #[ORM\ManyToMany(targetEntity: Articles::class, mappedBy: 'paniers')]
+    private Collection $articles;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->articles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -68,6 +72,33 @@ class Panier
             if ($user->getIdPanier() === $this) {
                 $user->setIdPanier(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Articles>
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Articles $article): self
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles->add($article);
+            $article->addPanier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Articles $article): self
+    {
+        if ($this->articles->removeElement($article)) {
+            $article->removePanier($this);
         }
 
         return $this;
