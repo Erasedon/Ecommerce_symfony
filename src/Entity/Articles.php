@@ -32,6 +32,9 @@ class Articles
     #[ORM\Column(length: 100)]
     private ?string $marque_articles = null;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Categories $id_categories = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,6 +108,18 @@ class Articles
     public function setMarqueArticles(string $marque_articles): self
     {
         $this->marque_articles = $marque_articles;
+
+        return $this;
+    }
+
+    public function getIdCategories(): ?Categories
+    {
+        return $this->id_categories;
+    }
+
+    public function setIdCategories(?Categories $id_categories): self
+    {
+        $this->id_categories = $id_categories;
 
         return $this;
     }
