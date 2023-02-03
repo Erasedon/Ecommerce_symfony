@@ -8,7 +8,11 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
-
+###> symfony/webpack-encore-bundle ###
+/node_modules/
+/public/build/
+npm-debug.log
+###< symfony/webpack-encore-bundle ###
 ###> phpunit/phpunit ###
 /phpunit.xml
 .phpunit.result.cache
@@ -18,3 +22,5 @@
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
+node_modules
+node_modules
