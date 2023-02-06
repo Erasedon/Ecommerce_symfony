@@ -20,10 +20,17 @@ Array.from(buttons).forEach((element, index) => {
         console.log(element,index)
             Array.from(dropdowns).forEach((dropdown, idx) => {
                 if(idx != index) {
-                    
-                    idx = index;
-
-                    dropdowns[idx].classList.toggle("hidden");
+                    switch (index) {
+                        case idx = 0:
+                                idx = 0;
+                            dropdowns[idx].classList.toggle("hidden");
+                            break;
+                        case idx = 1:
+                            idx = 1;
+                        dropdowns[idx].classList.toggle("hidden");
+                        break;
+                      
+                    }
                     
                 }
             })

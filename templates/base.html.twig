@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>{% block title %}Welcome!{% endblock %}</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css"  rel="stylesheet" />
   <link rel="icon"
     href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
   {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
@@ -17,12 +18,13 @@
 </head>
 
 <body>
+
   {% block nav %}
   <div class="relative bg-white">
     <div class="mx-auto max-w-7xl px-6">
       <div class="flex items-center justify-between border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
         <div class="flex justify-start lg:w-0 lg:flex-1">
-          <a href="#">
+          <a href="{{ path('app_accueil') }}">
             <span class="sr-only">Your Company</span>
             <img class="h-8 w-auto sm:h-10" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
               alt="">
@@ -295,12 +297,17 @@
           </div>
         </nav>
         <div class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-               {% if app.user == null %}
+        {% if app.user == null %}
           <a href="{{ path('app_register') }}" class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">register</a>
          {% endif %} 
          {% if app.user == null %}
           <a href="{{ path('app_login') }}" class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700">login</a>
          {% endif %}
+            {% if app.user %}
+            <div class="text-sm">
+               <a  class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700" href="{{ path('app_logout') }}"> {{ app.user.PseudoUser }} </a>
+            </div>
+        {% endif %}
              
         </div>
       </div>
@@ -420,6 +427,7 @@
 
   {% endblock %}
   {% block body %}{% endblock %}
+
 </body>
 
 </html>
