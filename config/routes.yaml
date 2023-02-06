@@ -9,3 +9,8 @@ controllers:
 app_lucky_number:
     path: /lucky/number
     controller: App\Controller\LuckyController::number
+
+    # config/routes.yaml
+app_logout:
+    path: /logout
+    methods: GET

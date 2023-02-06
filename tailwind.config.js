@@ -6,7 +6,12 @@ module.exports = {
     "./node_modules/flowbite/**/*.js",
   ],
   theme: {
-    extend: {},
+    extend: {
+        fontFamily: {
+            cabinetGrotesk: "'Cabinet Grotesk', san-serif",
+        }
+
+    },
   },
   plugins: [
     require('flowbite/plugin')

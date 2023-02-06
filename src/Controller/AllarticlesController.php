@@ -21,7 +21,7 @@ class AllarticlesController extends AbstractController
             'articles' => $articlesRepository->findAll(),
         ]);
     }
-    #[Route('/{id}', name: 'app_allarticles_show', methods: ['GET'])]     
+    #[Route('/allarticles/{id}', name: 'app_allarticles_show', methods: ['GET'])]     
     public function show(Articles $article,Categories $categorie): Response
     {
         return $this->render('allarticles/show.html.twig', [
