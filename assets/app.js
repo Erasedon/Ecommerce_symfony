@@ -9,4 +9,25 @@
 import './styles/app.css';
 
 // start the Stimulus application
-import './bootstrap';
+// import './bootstrap';
+
+const buttons = document.getElementsByClassName("button_dropdown");
+const dropdowns = document.getElementsByClassName('dropdown');
+
+Array.from(buttons).forEach((element, index) => {
+  
+    element.addEventListener("click", function() {
+        console.log(element,index)
+            Array.from(dropdowns).forEach((dropdown, idx) => {
+                if(idx != index) {
+                    
+                    idx = index;
+
+                    dropdowns[idx].classList.toggle("hidden");
+                    
+                }
+            })
+        
+          });
+});
+
