@@ -21,18 +21,11 @@ Array.from(buttons).forEach((element, index) => {
         console.log(element,index)
             Array.from(dropdowns).forEach((dropdown, idx) => {
                 if(idx != index) {
-                    switch (index) {
-                        case idx = 0:
-                                idx = 0;
-                            dropdowns[idx].classList.toggle("hidden");
-                            break;
-                        case idx = 1:
-                            idx = 1;
-                        dropdowns[idx].classList.toggle("hidden");
-                        break;
-                      
-                    }
+                   
+                    dropdowns[idx].classList.add("hidden");
                     
+                }else{
+                    dropdowns[idx].classList.toggle("hidden");
                 }
             })
         
@@ -52,3 +45,11 @@ prevButton.addEventListener("click", () => {
 	slidesContainer.scrollLeft -= slideWidth * 2;
 });
 
+const button_color= document.getElementsById("button-color");
+
+
+button_color.addEventListener("click", () => {
+    console.log(button_color)
+    // aria.toggleAttribute("disabled");
+    
+});
