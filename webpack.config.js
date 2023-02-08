@@ -12,7 +12,8 @@ Encore
     // public path used by the web server to access the output path
     .setPublicPath('/build')
     // only needed for CDN's or subdirectory deploy
-    //.setManifestKeyPrefix('build/')
+    //.setManifestKeyPrefix('build/')  
+   
 
     /*
      * ENTRY CONFIG
@@ -49,13 +50,24 @@ Encore
     // .configureBabel((config) => {
     //     config.plugins.push('@babel/a-babel-plugin');
     // })
-
+    .enablePostCssLoader()
     // enables and configure @babel/preset-env polyfills
     .configureBabelPresetEnv((config) => {
         config.useBuiltIns = 'usage';
         config.corejs = '3.23';
     })
+    .copyFiles({
+        from: './assets/img',
 
+        // optional target path, relative to the output dir
+        to: 'images/[path][name].[ext]',
+
+        // if versioning is enabled, add the file hash too
+        to: 'images/[path][name].[hash:8].[ext]',
+
+        // only copy files matching this pattern
+        pattern: /\.(png|jpg|jpeg)$/
+    })
     // enables Sass/SCSS support
     //.enableSassLoader()
 

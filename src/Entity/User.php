@@ -46,6 +46,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
+    #[ORM\Column(length: 25)]
+    private ?string $pseudo_user = null;
+
     public function __construct()
     {
         $this->commander = new ArrayCollection();
@@ -189,6 +192,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getPseudoUser(): ?string
+    {
+        return $this->pseudo_user;
+    }
+
+    public function setPseudoUser(string $pseudo_user): self
+    {
+        $this->pseudo_user = $pseudo_user;
 
         return $this;
     }
