@@ -54,13 +54,13 @@ class ArticlesRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Articles
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+   public function findOneByNomArticle($searchTerm): ?Articles
+   {
+       return $this->createQueryBuilder('a')
+           ->andWhere('a.nom_articles = :val')
+           ->setParameter('val', $searchTerm)
+           ->getQuery()
+           ->getOneOrNullResult()
+       ;
+   }
 }
