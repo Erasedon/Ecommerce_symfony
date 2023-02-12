@@ -53,3 +53,12 @@ button_color.addEventListener("click", () => {
     // aria.toggleAttribute("disabled");
     
 });
+
+const url = new URL(window.location); 
+str ="";
+form_search=document.getElementById("search_searchTerm")
+console.log(form_search.value)
+form_search.onkeyup=(e)=>showResult()
+function showResult(str) {
+console.log(str)
+}

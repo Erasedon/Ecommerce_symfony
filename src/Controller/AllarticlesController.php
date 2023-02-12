@@ -16,26 +16,29 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AllarticlesController extends AbstractController
 {
-    #[Route('/allarticles', name: 'app_allarticles')]
+    #[Route('/allarticles', name: 'app_allarticles',methods: ['GET'])]
     public function index(Request $request,ArticlesRepository $articlesRepository,CategoriesRepository $categoriesRepository,TailleRepository $tailleRepository): Response
     {
 
         $form = $this->createForm(SearchType::class);
         $form->handleRequest($request);
 
+        $sarticles= [];
+        // dd($searchTerm);
         if ($form->isSubmitted() && $form->isValid()) {
-            $searchTerm = $form->get('searchTerm')->getData();
+            $searchTerm = $form->getData(); 
             // Perform the search and return the results
-            $articles = $articlesRepository->findOneByNomArticle($searchTerm);
-            dd($articles);
+            $sarticles = $articlesRepository->findByNomArticle($searchTerm);
         }
+        
 
-        // $searchTerm = 12;
+
         return $this->render('allarticles/index.html.twig', [
             'controller_name' => 'AllarticlesController',
             'form' => $form->createView(),
             'taille' => $tailleRepository->findAll(),
             'categories' => $categoriesRepository->findAll(),
+            'searchTerm' => $sarticles,
             'articles' => $articlesRepository->findAll(),
         ]);
         // return $this->render('allarticles/index.html.twig', [

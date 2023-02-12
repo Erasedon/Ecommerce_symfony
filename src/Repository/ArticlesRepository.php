@@ -54,13 +54,17 @@ class ArticlesRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-   public function findOneByNomArticle($searchTerm): ?Articles
+   public function findByNomArticle($searchTerm): ?array
    {
        return $this->createQueryBuilder('a')
            ->andWhere('a.nom_articles = :val')
            ->setParameter('val', $searchTerm)
            ->getQuery()
-           ->getOneOrNullResult()
+           ->getResult()
+       
        ;
    }
 }
+
+//findonebyarticles
+ //    ->getOneOrNullResult()

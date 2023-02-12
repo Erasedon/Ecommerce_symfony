@@ -15,19 +15,19 @@ class SearchType extends AbstractType
     {
         $builder
         ->add('searchTerm', TextType::class, [
-            'label' => 'Recherche Articles',
+            'label' => "Recherche Articles",
             'required' => false,
         ])
         ->add('submit', SubmitType::class, [
-            'label' => 'Searcht',
+            'label' => 'Rechercher',
         ])
     ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([
-           
+        $resolver->setDefaults([    
+        'method' => 'GET',
         ]);
     }
 }

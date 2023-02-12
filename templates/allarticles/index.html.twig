@@ -309,26 +309,13 @@
       <div class="flex items-baseline justify-between border-b border-gray-200 pt-24 pb-6">
 
       {{ form_start(form) }}
-    {{ form_row(form) }}
-    {{ form_end(form) }}
+        {{ form_label(form.searchTerm) }}
+        <br>
+        {{ form_widget(form.searchTerm) }}
 
-          {# <label for="default-search"
-            class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-          <div class="relative">
-            <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
-              <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor"
-                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-              </svg>
-            </div>
-            <input type="search" id="default-search"
-              class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="Search Mockups, Logos..." required>
-            <button type="submit"
-              class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
-          </div> #}
-        
+      {{ form_end(form) }}
+
+         
         <div class="flex items-center">
           <div class="relative inline-block text-left">
             <div>
@@ -568,6 +555,7 @@
             <!-- Replace with your content -->
 
             <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+             {% if searchTerm == null %}
               {% for article in articles %}
               <a href="{{ path('app_allarticles_show', {'id': article.id}) }}">
                 <div class="group relative">
@@ -592,6 +580,34 @@
                 </div>
               </a>
               {% endfor %}
+               {% else %}
+              
+                {% for sart in searchTerm %}
+                  
+              <a href="{{ path('app_allarticles_show', {'id': sart.id}) }}">
+                <div class="group relative">
+                  <div
+                    class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
+                    <img src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg"
+                      alt="Front of men&#039;s Basic Tee in black."
+                      class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+                  </div>
+                  <div class="mt-4 flex justify-between">
+                    <div>
+                      <h3 class="text-sm text-gray-700">
+
+                        <span aria-hidden="true" class="absolute inset-0"></span>
+                        {{ sart.nomArticles }}
+
+                      </h3>
+                      <p class="mt-1 text-sm text-gray-500">{{ sart.quantiteArticles }}</p>
+                    </div>
+                    <p class="text-sm font-medium text-gray-900">{{ sart.prixArticles }}€</p>
+                  </div>
+                </div>
+              </a>
+              {% endfor %} 
+              {% endif %}
             </div>
 
             <!-- /End replace -->
