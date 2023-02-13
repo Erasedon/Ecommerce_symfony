@@ -553,10 +553,11 @@
           <!-- Product grid -->
           <div class="lg:col-span-3">
             <!-- Replace with your content -->
-
-            <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+            <div  class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+            
              {% if searchTerm == null %}
               {% for article in articles %}
+                 <div id="search-results">
               <a href="{{ path('app_allarticles_show', {'id': article.id}) }}">
                 <div class="group relative">
                   <div
@@ -579,11 +580,12 @@
                   </div>
                 </div>
               </a>
+                 </div>
               {% endfor %}
                {% else %}
               
                 {% for sart in searchTerm %}
-                  
+                     <div id="search-results">
               <a href="{{ path('app_allarticles_show', {'id': sart.id}) }}">
                 <div class="group relative">
                   <div
@@ -606,6 +608,7 @@
                   </div>
                 </div>
               </a>
+              </div>
               {% endfor %} 
               {% endif %}
             </div>

@@ -61,7 +61,6 @@ class ArticlesRepository extends ServiceEntityRepository
            ->setParameter('val', $searchTerm)
            ->getQuery()
            ->getResult()
-       
        ;
    }
 }
