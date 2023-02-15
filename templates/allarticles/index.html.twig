@@ -68,7 +68,7 @@
             <h3 class="sr-only">Categories</h3>
             <ul role="list" class="px-2 py-3 font-medium text-gray-900">
               <li>
-                <a href="#" class="block px-2 py-3">Totes</a>
+                <a href="#" class="block px-2 py-3">Le plus populaire</a>
               </li>
 
               <li>
@@ -311,8 +311,9 @@
       {{ form_start(form) }}
         {{ form_label(form.searchTerm) }}
         <br>
+        
         {{ form_widget(form.searchTerm) }}
-
+        
       {{ form_end(form) }}
 
          
@@ -322,7 +323,9 @@
               <button type="button"
                 class="button_dropdown group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
                 id="menu-button" aria-expanded="false" aria-haspopup="true">
-                Sort
+                
+                Trier
+                
                 <!-- Heroicon name: mini/chevron-down -->
                 <svg class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                   xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -353,19 +356,19 @@
                   Selected: "font-medium text-gray-900", Not Selected: "text-gray-500"
                 -->
                 <a href="#" class="font-medium text-gray-900 block px-4 py-2 text-sm" role="menuitem" tabindex="-1"
-                  id="menu-item-0">Most Popular</a>
+                  id="menu-item-0">Le plus populaire</a>
 
                 <a href="#" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1"
-                  id="menu-item-1">Best Rating</a>
+                  id="menu-item-1">Meilleure cote</a>
 
                 <a href="#" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1"
-                  id="menu-item-2">Newest</a>
+                  id="menu-item-2">Le plus récent</a>
 
                 <a href="#" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1"
-                  id="menu-item-3">Price: Low to High</a>
+                  id="menu-item-3">Prix ​​croissant</a>
 
                 <a href="#" class="text-gray-500 block px-4 py-2 text-sm" role="menuitem" tabindex="-1"
-                  id="menu-item-4">Price: High to Low</a>
+                  id="menu-item-4">Prix ​​: du plus élevé au plus bas</a>
               </div>
             </div>
           </div>
@@ -401,7 +404,7 @@
           <form class="hidden lg:block">
             <h3 class="sr-only">Categories</h3>
             <ul role="list" class="space-y-4 border-b border-gray-200 pb-6 text-sm font-medium text-gray-900">
-              <li>
+              <li style ="display:none">
                 <a href="#">Laptop Sleeves</a>
               </li>
             </ul>
@@ -442,9 +445,9 @@
                 <div class="space-y-4">
                   {% for cat in categories %}
                   <div class="flex items-center">
-                    <input id="filter-color-{{cat.id}}" name="cat[]" value="{{ cat.Nomcategories }}" type="checkbox"
+                    <input id="filter-cat-0" name="cat[]" value="{{ cat.id }}" type="checkbox"
                       class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-color-{{cat.id}}"
+                    <label for="filter-cat-0"
                       class="ml-3 text-sm text-gray-600">{{ cat.Nomcategories }}</label>
                   </div>
 
@@ -504,7 +507,7 @@
                 <button type="button"
                   class="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500"
                   aria-controls="filter-section-2" aria-expanded="false">
-                  <span class="font-medium text-gray-900">Size</span>
+                  <span class="font-medium text-gray-900">taille</span>
                   <span class="ml-6 flex items-center">
                     <!--
                       Expand icon, show/hide based on section open state.
@@ -535,9 +538,9 @@
 
                   {% for size in taille %}
                   <div class="flex items-center">
-                    <input id="filter-color-{{size.id}}" name="size[]" value="{{ size.NomTaille }}" type="checkbox"
+                    <input id="filter-size-{{size.id}}" name="size[]" value="{{ size.NomTaille }}" type="checkbox"
                       class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-color-{{size.id}}"
+                    <label for="filter-size-{{size.id}}"
                       class="ml-3 text-sm text-gray-600">{{ size.NomTaille }}</label>
                   </div>
 
@@ -555,62 +558,8 @@
             <!-- Replace with your content -->
             <div  class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
             
-             {% if searchTerm == null %}
-              {% for article in articles %}
-                 <div id="search-results">
-              <a href="{{ path('app_allarticles_show', {'id': article.id}) }}">
-                <div class="group relative">
-                  <div
-                    class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
-                    <img src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg"
-                      alt="Front of men&#039;s Basic Tee in black."
-                      class="h-full w-full object-cover object-center lg:h-full lg:w-full">
-                  </div>
-                  <div class="mt-4 flex justify-between">
-                    <div>
-                      <h3 class="text-sm text-gray-700">
-
-                        <span aria-hidden="true" class="absolute inset-0"></span>
-                        {{ article.nomArticles }}
-
-                      </h3>
-                      <p class="mt-1 text-sm text-gray-500">{{ article.quantiteArticles }}</p>
-                    </div>
-                    <p class="text-sm font-medium text-gray-900">{{ article.prixArticles }}€</p>
-                  </div>
-                </div>
-              </a>
-                 </div>
-              {% endfor %}
-               {% else %}
-              
-                {% for sart in searchTerm %}
-                     <div id="search-results">
-              <a href="{{ path('app_allarticles_show', {'id': sart.id}) }}">
-                <div class="group relative">
-                  <div
-                    class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
-                    <img src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg"
-                      alt="Front of men&#039;s Basic Tee in black."
-                      class="h-full w-full object-cover object-center lg:h-full lg:w-full">
-                  </div>
-                  <div class="mt-4 flex justify-between">
-                    <div>
-                      <h3 class="text-sm text-gray-700">
-
-                        <span aria-hidden="true" class="absolute inset-0"></span>
-                        {{ sart.nomArticles }}
-
-                      </h3>
-                      <p class="mt-1 text-sm text-gray-500">{{ sart.quantiteArticles }}</p>
-                    </div>
-                    <p class="text-sm font-medium text-gray-900">{{ sart.prixArticles }}€</p>
-                  </div>
-                </div>
-              </a>
-              </div>
-              {% endfor %} 
-              {% endif %}
+          
+                {% include "allarticles/search.html.twig" %}
             </div>
 
             <!-- /End replace -->

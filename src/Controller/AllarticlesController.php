@@ -23,29 +23,33 @@ class AllarticlesController extends AbstractController
     #[Route('/allarticles', name: 'app_allarticles',methods: ['GET'])]
     public function index(Request $request,ArticlesRepository $articlesRepository,CategoriesRepository $categoriesRepository,TailleRepository $tailleRepository): Response
     {
-
         $form = $this->createForm(SearchType::class);
         $form->handleRequest($request);
-
         $sarticles= [];
-        // dd($searchTerm);
-       
+        // $checkouts= [];
+        
         if ($form->isSubmitted() && $form->isValid()) {
-            $searchTerm = $form->getData(); 
-            // Perform the search and return the results
-           
-                $sarticles = $articlesRepository->findByNomArticle($searchTerm);   
-                
-                
-              
             
-        } 
+            // $searchTerm = $form->getData(); 
+            $searchTerm = $form->get('searchTerm');
+            // Perform the search and return the results
+        //    $checkout = $request->request->get("checkout");
+            $sarticles = $articlesRepository->findByNomArticle($searchTerm);  
+            //  dd($searchTerm);
+            dd($sarticles);
+            // $checkouts = $categoriesRepository->findByNomCategory($checkout);   
+            
+            return $this->render('allarticles/search.html.twig', [
+            'searchTerm' =>dd($sarticles),
+            ]);
+        } $sarticles="";
+        
         return $this->render('allarticles/index.html.twig', [
             'controller_name' => 'AllarticlesController',
             'form' => $form->createView(),
             'taille' => $tailleRepository->findAll(),
+            'searchTerm' => $sarticles,
             'categories' => $categoriesRepository->findAll(),
-            'searchTerm' =>$sarticles,
             'articles' => $articlesRepository->findAll(),
         ]);
         // return $this->render('allarticles/index.html.twig', [
@@ -53,8 +57,24 @@ class AllarticlesController extends AbstractController
         //     'taille' => $tailleRepository->findAll(),
         //     'categories' => $categoriesRepository->findAll(),
         //     'articles' => $articlesRepository->findAll(),
+        //     'checkbox' =>$checkouts,
         // ]);
 
+    }
+    
+    #[Route('/allarticles/search', name: 'app_allarticles_search', methods: ['GET'])]     
+    public function showallarticles(Request $request,ArticlesRepository $articlesRepository,CategoriesRepository $categoriesRepository,TailleRepository $tailleRepository): Response
+    {
+        // $form = $this->createForm(SearchType::class);
+        // $form->handleRequest($request);
+        // $sarticles= [];
+        $searchTerm = $request->get('searchTerm');
+        
+        $sarticles = $articlesRepository->findByNomArticle($searchTerm);  
+        return new JsonResponse(['result' => $searchTerm]);
+        // return $this->render('allarticles/search.html.twig', [
+        //     'searchTerm' =>$sarticles,
+        //     ]);
     }
     #[Route('/allarticles/{id}', name: 'app_allarticles_show', methods: ['GET'])]     
     public function show(Articles $article,Categories $categorie,Taille $taille): Response
