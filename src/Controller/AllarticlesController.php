@@ -68,14 +68,24 @@ class AllarticlesController extends AbstractController
         // $form = $this->createForm(SearchType::class);
         // $form->handleRequest($request);
         // $sarticles= [];
-        $searchTerm = $request->get('searchTerm');
+        $searchTerm = $request->get('search')['searchTerm'];
+        // $searchTerm = json_decode($request->getContent(), true);
+
+        // Faites ici le traitement des résultats et retournez la réponse
+        // var_dump($searchTerm);
+        if($searchTerm === null){
+            $sarticles = $articlesRepository->findAll();
         
-        $sarticles = $articlesRepository->findByNomArticle($searchTerm);  
-        return new JsonResponse(['result' => $searchTerm]);
-        // return $this->render('allarticles/search.html.twig', [
-        //     'searchTerm' =>$sarticles,
-        //     ]);
+        }else{
+            $sarticles = $articlesRepository->findByNomArticle($searchTerm);  
+            
+        }
+
+        return $this->render('allarticles/search.html.twig', [
+            'searchTerm' =>$sarticles,
+            ]);
     }
+
     #[Route('/allarticles/{id}', name: 'app_allarticles_show', methods: ['GET'])]     
     public function show(Articles $article,Categories $categorie,Taille $taille): Response
     {
