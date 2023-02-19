@@ -25,32 +25,32 @@ class AllarticlesController extends AbstractController
     {
         $form = $this->createForm(SearchType::class);
         $form->handleRequest($request);
-        $sarticles= [];
+        // $sarticles= [];
         // $checkouts= [];
         
-        if ($form->isSubmitted() && $form->isValid()) {
+        // if ($form->isSubmitted() && $form->isValid()) {
             
             // $searchTerm = $form->getData(); 
-            $searchTerm = $form->get('searchTerm');
+            // $searchTerm = $form->get('searchTerm');
             // Perform the search and return the results
         //    $checkout = $request->request->get("checkout");
-            $sarticles = $articlesRepository->findByNomArticle($searchTerm);  
+            // $sarticles = $articlesRepository->findByNomArticle($searchTerm);  
             //  dd($searchTerm);
-            dd($sarticles);
+            // dd($sarticles);
             // $checkouts = $categoriesRepository->findByNomCategory($checkout);   
             
-            return $this->render('allarticles/search.html.twig', [
-            'searchTerm' =>dd($sarticles),
-            ]);
-        } $sarticles="";
+            // return $this->render('allarticles/search.html.twig', [
+            // 'searchTerm' =>$sarticles,
+            // ]);
+        // } 
+        // $sarticles="";
         
         return $this->render('allarticles/index.html.twig', [
             'controller_name' => 'AllarticlesController',
             'form' => $form->createView(),
             'taille' => $tailleRepository->findAll(),
-            'searchTerm' => $sarticles,
+            'searchTerm' => $articlesRepository->findAll(),
             'categories' => $categoriesRepository->findAll(),
-            'articles' => $articlesRepository->findAll(),
         ]);
         // return $this->render('allarticles/index.html.twig', [
         //     'controller_name' => 'AllarticlesController',
@@ -72,12 +72,15 @@ class AllarticlesController extends AbstractController
         // $searchTerm = json_decode($request->getContent(), true);
 
         // Faites ici le traitement des résultats et retournez la réponse
-        // var_dump($searchTerm);
         if($searchTerm === "" || empty($searchTerm)){
             $sarticles = $articlesRepository->findAll();
-        
+          
         }else{
-            $sarticles = $articlesRepository->findByNomArticle($searchTerm);  
+            $sarticles = $articlesRepository->findByNomArticle($searchTerm);
+            
+            if($sarticles === []){
+                $sarticles = $articlesRepository->findAll();
+            }
             
         }
 

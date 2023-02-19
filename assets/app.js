@@ -49,7 +49,7 @@ searchForm.addEventListener('submit', function (event) {
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-            var view = xhr.responseText;
+            var view = '<div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">'+xhr.responseText+'</div>';
             // console.log("53", data);
             // var data = JSON.parse(xhr.responseText);
             displayResults(view); // Appel à la fonction qui affiche les résultats
