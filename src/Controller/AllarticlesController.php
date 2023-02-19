@@ -63,7 +63,7 @@ class AllarticlesController extends AbstractController
     }
     
     #[Route('/allarticles/search', name: 'app_allarticles_search', methods: ['GET'])]     
-    public function showallarticles(Request $request,ArticlesRepository $articlesRepository,CategoriesRepository $categoriesRepository,TailleRepository $tailleRepository): Response
+    public function showallarticles(Request $request,ArticlesRepository $articlesRepository): Response
     {
         // $form = $this->createForm(SearchType::class);
         // $form->handleRequest($request);
@@ -73,7 +73,7 @@ class AllarticlesController extends AbstractController
 
         // Faites ici le traitement des résultats et retournez la réponse
         // var_dump($searchTerm);
-        if($searchTerm === null){
+        if($searchTerm === "" || empty($searchTerm)){
             $sarticles = $articlesRepository->findAll();
         
         }else{

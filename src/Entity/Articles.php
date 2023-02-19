@@ -34,9 +34,6 @@ class Articles
     #[ORM\Column(length: 100)]
     private ?string $marque_articles = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?Categories $id_categories = null;
-
     #[ORM\ManyToMany(targetEntity: Media::class, inversedBy: 'articles')]
     private Collection $medias;
 
@@ -45,6 +42,9 @@ class Articles
 
     #[ORM\ManyToMany(targetEntity: Panier::class, inversedBy: 'articles')]
     private Collection $paniers;
+
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    private ?Categories $categories = null;
 
     public function __construct()
     {
@@ -130,17 +130,7 @@ class Articles
         return $this;
     }
 
-    public function getIdCategories(): ?Categories
-    {
-        return $this->id_categories;
-    }
-
-    public function setIdCategories(?Categories $id_categories): self
-    {
-        $this->id_categories = $id_categories;
-
-        return $this;
-    }
+   
 
     /**
      * @return Collection<int, Media>
@@ -210,6 +200,18 @@ class Articles
     public function removePanier(Panier $panier): self
     {
         $this->paniers->removeElement($panier);
+
+        return $this;
+    }
+
+    public function getCategories(): ?categories
+    {
+        return $this->categories;
+    }
+
+    public function setCategories(?categories $categories): self
+    {
+        $this->categories = $categories;
 
         return $this;
     }
