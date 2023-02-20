@@ -4,10 +4,7 @@
 
 {% block body %}
 <form class="mt-8 space-y-6" method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
-
+   
 <div class="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
   <div class="w-full max-w-md space-y-8">
     <div>
@@ -31,7 +28,9 @@
           <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
           <label for="remember-me" class="ml-2 block text-sm text-gray-900">Se souvenir de moi</label>
         </div>
-
+         {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
         <div class="text-sm">
           <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">oubliez mdp?</a>
         </div>
