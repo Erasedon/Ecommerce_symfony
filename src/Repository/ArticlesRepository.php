@@ -63,6 +63,15 @@ class ArticlesRepository extends ServiceEntityRepository
            ->getResult()
        ;
    }
+   public function findByidCat($searchTerm): ?array
+   {
+       return $this->createQueryBuilder('a')
+           ->andWhere('a.categories = :val')
+           ->setParameter('val', $searchTerm)
+           ->getQuery()
+           ->getResult()
+       ;
+   }
 }
 
 //findonebyarticles

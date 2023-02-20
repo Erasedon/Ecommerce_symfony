@@ -94,7 +94,7 @@
                 <button type="button"
                   class="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500"
                   aria-controls="filter-section-mobile-0" aria-expanded="false">
-                  <span class="font-medium text-gray-900">Color</span>
+                  <span class="font-medium text-gray-900">Categories</span>
                   <span class="ml-6 flex items-center">
                     <!--
                       Expand icon, show/hide based on section open state.
@@ -122,41 +122,16 @@
               <!-- Filter section, show/hide based on section state. -->
               <div class="pt-6" id="filter-section-mobile-0">
                 <div class="space-y-6">
+                 {% for cat in categories %}
                   <div class="flex items-center">
-                    <input id="filter-mobile-color-0" name="color[]" value="white" type="checkbox"
-                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-color-0" class="ml-3 min-w-0 flex-1 text-gray-500">White</label>
+                    <input  name="cat[]" value="{{ cat.id }}" type="checkbox"
+                      class="filter-mobile-cat-0 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <label for="filter-cat-0"
+                      class="ml-3 text-sm text-gray-600">{{ cat.Nomcategories }}</label>
                   </div>
 
-                  <div class="flex items-center">
-                    <input id="filter-mobile-color-1" name="color[]" value="beige" type="checkbox"
-                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-color-1" class="ml-3 min-w-0 flex-1 text-gray-500">Beige</label>
-                  </div>
-
-                  <div class="flex items-center">
-                    <input id="filter-mobile-color-2" name="color[]" value="blue" type="checkbox" checked
-                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-color-2" class="ml-3 min-w-0 flex-1 text-gray-500">Blue</label>
-                  </div>
-
-                  <div class="flex items-center">
-                    <input id="filter-mobile-color-3" name="color[]" value="brown" type="checkbox"
-                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-color-3" class="ml-3 min-w-0 flex-1 text-gray-500">Brown</label>
-                  </div>
-
-                  <div class="flex items-center">
-                    <input id="filter-mobile-color-4" name="color[]" value="green" type="checkbox"
-                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-color-4" class="ml-3 min-w-0 flex-1 text-gray-500">Green</label>
-                  </div>
-
-                  <div class="flex items-center">
-                    <input id="filter-mobile-color-5" name="color[]" value="purple" type="checkbox"
-                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-color-5" class="ml-3 min-w-0 flex-1 text-gray-500">Purple</label>
-                  </div>
+                  {% endfor %}
+        
                 </div>
               </div>
             </div>
@@ -167,7 +142,7 @@
                 <button type="button"
                   class="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500"
                   aria-controls="filter-section-mobile-1" aria-expanded="false">
-                  <span class="font-medium text-gray-900">Category</span>
+                  <span class="font-medium text-gray-900">Taille</span>
                   <span class="ml-6 flex items-center">
                     <!--
                       Expand icon, show/hide based on section open state.
@@ -195,35 +170,16 @@
               <!-- Filter section, show/hide based on section state. -->
               <div class="pt-6" id="filter-section-mobile-1">
                 <div class="space-y-6">
+                  {% for size in taille %}
                   <div class="flex items-center">
-                    <input id="filter-mobile-category-0" name="category[]" value="new-arrivals" type="checkbox"
+                    <input id="filter-size-{{size.id}}" name="size[]" value="{{ size.NomTaille }}" type="checkbox"
                       class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-category-0" class="ml-3 min-w-0 flex-1 text-gray-500">New Arrivals</label>
+                    <label for="filter-size-{{size.id}}"
+                      class="ml-3 text-sm text-gray-600">{{ size.NomTaille }}</label>
                   </div>
 
-                  <div class="flex items-center">
-                    <input id="filter-mobile-category-1" name="category[]" value="sale" type="checkbox"
-                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-category-1" class="ml-3 min-w-0 flex-1 text-gray-500">Sale</label>
-                  </div>
+                  {% endfor %}
 
-                  <div class="flex items-center">
-                    <input id="filter-mobile-category-2" name="category[]" value="travel" type="checkbox" checked
-                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-category-2" class="ml-3 min-w-0 flex-1 text-gray-500">Travel</label>
-                  </div>
-
-                  <div class="flex items-center">
-                    <input id="filter-mobile-category-3" name="category[]" value="organization" type="checkbox"
-                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-category-3" class="ml-3 min-w-0 flex-1 text-gray-500">Organization</label>
-                  </div>
-
-                  <div class="flex items-center">
-                    <input id="filter-mobile-category-4" name="category[]" value="accessories" type="checkbox"
-                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-category-4" class="ml-3 min-w-0 flex-1 text-gray-500">Accessories</label>
-                  </div>
                 </div>
               </div>
             </div>
@@ -234,7 +190,7 @@
                 <button type="button"
                   class="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500"
                   aria-controls="filter-section-mobile-2" aria-expanded="false">
-                  <span class="font-medium text-gray-900">Size</span>
+                  <span class="font-medium text-gray-900">Stock</span>
                   <span class="ml-6 flex items-center">
                     <!--
                       Expand icon, show/hide based on section open state.
@@ -263,39 +219,9 @@
               <div class="pt-6" id="filter-section-mobile-2">
                 <div class="space-y-6">
                   <div class="flex items-center">
-                    <input id="filter-mobile-size-0" name="size[]" value="2l" type="checkbox"
+                    <input id="filter-stock-0" name="stock[]" value="istock" type="checkbox"
                       class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-size-0" class="ml-3 min-w-0 flex-1 text-gray-500">2L</label>
-                  </div>
-
-                  <div class="flex items-center">
-                    <input id="filter-mobile-size-1" name="size[]" value="6l" type="checkbox"
-                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-size-1" class="ml-3 min-w-0 flex-1 text-gray-500">6L</label>
-                  </div>
-
-                  <div class="flex items-center">
-                    <input id="filter-mobile-size-2" name="size[]" value="12l" type="checkbox"
-                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-size-2" class="ml-3 min-w-0 flex-1 text-gray-500">12L</label>
-                  </div>
-
-                  <div class="flex items-center">
-                    <input id="filter-mobile-size-3" name="size[]" value="18l" type="checkbox"
-                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-size-3" class="ml-3 min-w-0 flex-1 text-gray-500">18L</label>
-                  </div>
-
-                  <div class="flex items-center">
-                    <input id="filter-mobile-size-4" name="size[]" value="20l" type="checkbox"
-                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-size-4" class="ml-3 min-w-0 flex-1 text-gray-500">20L</label>
-                  </div>
-
-                  <div class="flex items-center">
-                    <input id="filter-mobile-size-5" name="size[]" value="40l" type="checkbox" checked
-                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                    <label for="filter-mobile-size-5" class="ml-3 min-w-0 flex-1 text-gray-500">40L</label>
+                    <label for="filter-stock-0" class="ml-3 text-sm text-gray-600">En stock</label>
                   </div>
                 </div>
               </div>
@@ -445,8 +371,8 @@
                 <div class="space-y-4">
                   {% for cat in categories %}
                   <div class="flex items-center">
-                    <input id="filter-cat-0" name="cat[]" value="{{ cat.id }}" type="checkbox"
-                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <input name="cat[]" value="{{ cat.id }}" type="checkbox"
+                      class="filter-cat-0 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
                     <label for="filter-cat-0"
                       class="ml-3 text-sm text-gray-600">{{ cat.Nomcategories }}</label>
                   </div>
@@ -538,8 +464,8 @@
 
                   {% for size in taille %}
                   <div class="flex items-center">
-                    <input id="filter-size-{{size.id}}" name="size[]" value="{{ size.NomTaille }}" type="checkbox"
-                      class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <input name="size[]" value="{{ size.id }}" type="checkbox"
+                      class="filter-size-0 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
                     <label for="filter-size-{{size.id}}"
                       class="ml-3 text-sm text-gray-600">{{ size.NomTaille }}</label>
                   </div>

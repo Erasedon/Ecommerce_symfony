@@ -27,7 +27,12 @@ class AllarticlesController extends AbstractController
         $form->handleRequest($request);
         // $sarticles= [];
         // $checkouts= [];
-        
+        $searchTerm="";
+        if($searchTerm === "" || empty($searchTerm)){
+            $sarticles = $articlesRepository->findAll();
+          
+        }
+      
         // if ($form->isSubmitted() && $form->isValid()) {
             
             // $searchTerm = $form->getData(); 
@@ -49,7 +54,7 @@ class AllarticlesController extends AbstractController
             'controller_name' => 'AllarticlesController',
             'form' => $form->createView(),
             'taille' => $tailleRepository->findAll(),
-            'searchTerm' => $articlesRepository->findAll(),
+            'searchTerm' => $sarticles,
             'categories' => $categoriesRepository->findAll(),
         ]);
         // return $this->render('allarticles/index.html.twig', [
@@ -72,23 +77,64 @@ class AllarticlesController extends AbstractController
         // $searchTerm = json_decode($request->getContent(), true);
 
         // Faites ici le traitement des résultats et retournez la réponse
-        if($searchTerm === "" || empty($searchTerm)){
-            $sarticles = $articlesRepository->findAll();
-          
-        }else{
+      
             $sarticles = $articlesRepository->findByNomArticle($searchTerm);
-            
+           
             if($sarticles === []){
                 $sarticles = $articlesRepository->findAll();
             }
-            
-        }
+        
 
         return $this->render('allarticles/search.html.twig', [
             'searchTerm' =>$sarticles,
             ]);
     }
+    #[Route('/allarticles/checkbox', name: 'app_allarticles_checkbox', methods: ['GET'])]     
+    public function trierallarticles(Request $request,ArticlesRepository $articlesRepository,TailleRepository $tailleRepository): Response
+    {
+        // $form = $this->createForm(SearchType::class);
+        // $form->handleRequest($request);
+        // $sarticles= [];
+        $searchTerm = $request->get('checkbox');
+        // $searchTerm = json_decode($request->getContent(), true);
 
+        // Faites ici le traitement des résultats et retournez la réponse
+
+            $sarticles = $articlesRepository->findByidCat($searchTerm);
+            // dd($sarticles);
+            if($sarticles === []){
+                $sarticles = $articlesRepository->findAll();
+            }
+            
+            
+
+        return $this->render('allarticles/search.html.twig', [
+            'searchTerm' =>$sarticles,
+            ]);
+    }
+    #[Route('/allarticles/checkboxt', name: 'app_allarticles_checkboxTaille', methods: ['GET'])]     
+    public function triertailleallarticles(Request $request,ArticlesRepository $articlesRepository,TailleRepository $tailleRepository): Response
+    {
+        // $form = $this->createForm(SearchType::class);
+        // $form->handleRequest($request);
+        // $sarticles= [];
+        $searchTerm = $request->get('taille');
+        // $searchTerm = json_decode($request->getContent(), true);
+
+        // Faites ici le traitement des résultats et retournez la réponse
+
+            $sarticles = $tailleRepository->findByidtaille($searchTerm);
+            // dd($sarticles);
+            if($sarticles === []){
+                $sarticles = $articlesRepository->findAll();
+            }
+            
+            
+
+        return $this->render('allarticles/search.html.twig', [
+            'searchTerm' =>$sarticles,
+            ]);
+    }
     #[Route('/allarticles/{id}', name: 'app_allarticles_show', methods: ['GET'])]     
     public function show(Articles $article,Categories $categorie,Taille $taille): Response
     {
