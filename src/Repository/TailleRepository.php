@@ -42,6 +42,16 @@ class TailleRepository extends ServiceEntityRepository
 //    /**
 //     * @return Taille[] Returns an array of Taille objects
 //     */
+
+public function findByidtaille($searchTerm): ?array
+{
+    return $this->createQueryBuilder('t')
+        ->andWhere('t.id = :val')
+        ->setParameter('val', $searchTerm)
+        ->getQuery()
+        ->getResult()
+    ;
+}
 //    public function findByExampleField($value): array
 //    {
 //        return $this->createQueryBuilder('t')
