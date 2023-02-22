@@ -29,7 +29,7 @@
           <label for="remember-me" class="ml-2 block text-sm text-gray-900">Se souvenir de moi</label>
         </div>
          {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        <div class="colors.red">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
         <div class="text-sm">
           <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">oubliez mdp?</a>
