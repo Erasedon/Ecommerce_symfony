@@ -191,7 +191,8 @@ Array.from(checkboxtaille).forEach((element, index) => {
                 // console.log("53", data);
                 // var data = JSON.parse(xhr.responseText);
                 displayResultsTaille(view); // Appel à la fonction qui affiche les résultats
-               
+                const newUrl = window.location.pathname + '?'+params;
+                history.pushState({}, '', newUrl);
             }
         };
         xhr.send();

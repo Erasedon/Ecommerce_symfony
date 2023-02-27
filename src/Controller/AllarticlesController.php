@@ -10,12 +10,12 @@ use App\Entity\Categories;
 use App\Repository\TailleRepository;
 use App\Repository\ArticlesRepository;
 use App\Repository\CategoriesRepository;
+use SebastianBergmann\Environment\Console;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
-
+use Symfony\Component\Translation\Loader\ArrayLoader;
 
 class AllarticlesController extends AbstractController
 {
@@ -136,8 +136,35 @@ class AllarticlesController extends AbstractController
             ]);
     }
     #[Route('/allarticles/{id}', name: 'app_allarticles_show', methods: ['GET'])]     
-    public function show(Articles $article,Categories $categorie,Taille $taille): Response
-    {
+    public function show(Request $request,Articles $article,Categories $categorie,Taille $taille): Response
+    {   
+ 
+            
+    
+        $session = $request->getSession();
+        // dans le tableau mettre id article
+         
+        // if($session->get('panier')){
+        //     $panier = $session->get('panier');
+                  
+        //         if($session->has('panier', $article)){
+        //             $i=1;
+        //             $tableau = [$article];
+        //             $articles=array_push($tableau,["quantite_panier"=>$i+1]);
+        //             dd($articles);
+        //             $session->set('panier',[$articles]);
+        //             $i;
+        //         }
+                
+        //         dd($session);
+        //         // $session->set('panier', []);
+
+        // }else{
+        // }
+        $session->set('panier', [$article]);
+        
+        // dd($session);
+    
         return $this->render('allarticles/show.html.twig', [
             'categorie' => $categorie,
             'article' => $article,
